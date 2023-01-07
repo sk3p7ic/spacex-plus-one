@@ -7,5 +7,5 @@ export default function App() {
       <Navbar height={60} />
       <HomePage />
     </div>
-  )
+  );
 }

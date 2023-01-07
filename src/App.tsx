@@ -1,11 +1,10 @@
-import { Navbar } from "./components/Navbar";
+import { Layout } from "./pages/_Layout";
 import { HomePage } from "./pages/Home";
 
 export default function App() {
   return (
-    <div>
-      <Navbar height={60} />
+    <Layout>
       <HomePage />
-    </div>
+    </Layout>
   );
 }

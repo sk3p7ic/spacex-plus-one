@@ -1,4 +1,15 @@
-import { Container, createStyles, Group, Header, Title } from "@mantine/core";
+import {
+  Burger,
+  Container,
+  createStyles,
+  Drawer,
+  Group,
+  Header,
+  MediaQuery,
+  Stack,
+  Title,
+} from "@mantine/core";
+import { useState } from "react";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -49,18 +60,47 @@ type NavbarProps = {
 
 export const Navbar = (props: NavbarProps) => {
   const { classes } = useStyles();
+  const [showNavigation, setShowNavigation] = useState<boolean>(false);
+
+  const toggleNaviation = () => {
+    const navState = showNavigation;
+    setShowNavigation(!navState);
+  };
 
   return (
     <Header height={props.height} className={classes.header}>
       <Container className={classes.headerContainer}>
         <Title order={2}>Spacex Lookup</Title>
-        <Group spacing={5}>
-          {navLinks.map((link) => (
-            <a href={link.href} key={link.href} className={classes.navLink}>
-              {link.name}
-            </a>
-          ))}
-        </Group>
+        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+          <Group spacing={5}>
+            {navLinks.map((link) => (
+              <a href={link.href} key={link.href} className={classes.navLink}>
+                {link.name}
+              </a>
+            ))}
+          </Group>
+        </MediaQuery>
+        <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+          <Burger
+            opened={showNavigation}
+            onClick={() => toggleNaviation()}
+            title={showNavigation ? "Close navigation" : "Open Navigation"}
+          />
+        </MediaQuery>
+        <Drawer
+          opened={showNavigation}
+          onClose={() => setShowNavigation(false)}
+          padding={props.height + 10}
+          withCloseButton={false}
+        >
+          <Stack>
+            {navLinks.map((link) => (
+              <a href={link.href} key={link.href} className={classes.navLink}>
+                {link.name}
+              </a>
+            ))}
+          </Stack>
+        </Drawer>
       </Container>
     </Header>
   );

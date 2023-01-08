@@ -11,6 +11,9 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 
+/** Defines the set of style classes that may be applied to the components
+ * below.
+ */
 const useStyles = createStyles((theme) => ({
   header: {
     backgroundColor: theme.colors.dark[8],
@@ -39,6 +42,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+/** Defines the links that are shown in the navbar. */
 const navLinks = [
   {
     name: "Home",
@@ -60,17 +64,13 @@ type NavbarProps = {
 
 export const Navbar = (props: NavbarProps) => {
   const { classes } = useStyles();
+  // Controls the mobile navigation menu's state on if it is shown or not
   const [showNavigation, setShowNavigation] = useState<boolean>(false);
-
-  const toggleNaviation = () => {
-    const navState = showNavigation;
-    setShowNavigation(!navState);
-  };
 
   return (
     <Header height={props.height} className={classes.header}>
       <Container className={classes.headerContainer}>
-        <Title order={2}>Spacex Lookup</Title>
+        <Title order={2}>SpaceX Lookup</Title>
         <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
           <Group spacing={5}>
             {navLinks.map((link) => (
@@ -83,7 +83,7 @@ export const Navbar = (props: NavbarProps) => {
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
           <Burger
             opened={showNavigation}
-            onClick={() => toggleNaviation()}
+            onClick={() => setShowNavigation((show) => !show)}
             title={showNavigation ? "Close navigation" : "Open Navigation"}
           />
         </MediaQuery>

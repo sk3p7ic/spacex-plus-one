@@ -44,6 +44,8 @@ const useStyles = createStyles((theme) => ({
     justifyContent: "center",
     gap: `${theme.spacing.md}px`,
     backgroundColor: `${theme.colors.dark[7]}BF`,
+    paddingLeft: `${theme.spacing.sm}px`,
+    paddingRight: `${theme.spacing.sm}px`,
     textAlign: "center",
     [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
       alignItems: "start",

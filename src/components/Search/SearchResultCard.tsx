@@ -9,6 +9,7 @@ import {
   List,
   HoverCard,
   Button,
+  MediaQuery,
 } from "@mantine/core";
 import { type LaunchesPastType } from "../../lib/searches/launchesPast";
 
@@ -67,19 +68,28 @@ export const SearchResultCard = ({ launch }: SearchResultCardProps) => {
           </List.Item>
 
           <List.Item>
-            <HoverCard width="100%" shadow="md" withArrow={true}>
-              <HoverCard.Target>
-                <Text>
-                  <strong>Rocket:</strong>{" "}
-                  <span style={{ textDecoration: "underline" }}>
-                    {launch.rocket.rocketName}
-                  </span>
-                </Text>
-              </HoverCard.Target>
-              <HoverCard.Dropdown className={classes.rocketInfoHoverCard}>
+            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+              <HoverCard width="100%" shadow="md" withArrow={true}>
+                <HoverCard.Target>
+                  <Text style={{ cursor: "pointer" }}>
+                    <strong>Rocket:</strong>{" "}
+                    <span style={{ textDecoration: "underline" }}>
+                      {launch.rocket.rocketName}
+                    </span>
+                  </Text>
+                </HoverCard.Target>
+                <HoverCard.Dropdown className={classes.rocketInfoHoverCard}>
+                  {launch.rocket.rocket.description}
+                </HoverCard.Dropdown>
+              </HoverCard>
+            </MediaQuery>
+            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+              <Text>
+                <strong>Rocket:</strong> {launch.rocket.rocketName}
+                <br />
                 {launch.rocket.rocket.description}
-              </HoverCard.Dropdown>
-            </HoverCard>
+              </Text>
+            </MediaQuery>
           </List.Item>
 
           <List.Item>

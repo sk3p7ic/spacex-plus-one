@@ -39,8 +39,8 @@ export const SearchResultCard = ({ launch }: SearchResultCardProps) => {
       <div className={classes.cardTitle}>
         <Title order={3}>{launch.missionName}</Title>
         <Group>
-          {launch.rocket.secondStage.payloads.map((payload) => (
-            <Badge key={payload.payloadType}>{payload.payloadType}</Badge>
+          {launch.rocket.secondStage.payloads.map((payload, idx) => (
+            <Badge key={idx}>{payload.payloadType}</Badge>
           ))}
         </Group>
       </div>

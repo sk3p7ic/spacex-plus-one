@@ -7,6 +7,7 @@ import {
   Pagination,
   Space,
   Stack,
+  Text,
   Title,
 } from "@mantine/core";
 import { useQuery } from "@apollo/client";
@@ -48,7 +49,26 @@ export const SearchMissionsPage = () => {
     setPage(newPage);
   };
 
-  if (loading) return <div>Loading</div>;
+  if (loading)
+    return (
+      <main className={classes.page}>
+        <Container>
+          <Title ta="center">Search Missions</Title>
+          <div className={classes.searchForm}>
+            <Input variant="filled" placeholder="Enter mission name." />
+            <Button>Search</Button>
+          </div>
+          <Space h="sm" />
+          <Pagination
+            total={11}
+            page={page}
+            onChange={(p) => handlePageChange(p)}
+          />
+          <Space h="sm" />
+          <Text>Loading...</Text>
+        </Container>
+      </main>
+    );
   if (error) return <div>Error: {error.message}</div>;
 
   return (

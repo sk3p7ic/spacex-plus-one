@@ -8,6 +8,7 @@ import { HomePage } from "./pages/Home";
 import { ErrorPage } from "./pages/_404";
 import { SearchMissionsPage } from "./pages/SearchMissions";
 import { ShipPage, loader as shipPageLoader } from "./pages/ShipById";
+import { SitePage, loader as sitePageLoader } from "./pages/SiteById";
 
 const toRouteElement = (children: JSX.Element): JSX.Element => (
   <Layout>{children}</Layout>
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
   {
     path: "/sites",
     element: <Navigate to="/search-missions" replace />,
+  },
+  {
+    path: "/sites/:siteId",
+    element: toRouteElement(<SitePage />),
+    loader: sitePageLoader,
   },
 ]);
 

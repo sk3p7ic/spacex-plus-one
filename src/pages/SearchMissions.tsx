@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   Button,
   Container,
@@ -11,6 +12,7 @@ import { useQuery } from "@apollo/client";
 import {
   getLaunchesLastQuery,
   dataToLaunchType,
+  type LaunchesPastType,
 } from "../lib/searches/launchesPast";
 import { SearchResultCard } from "../components/Search/SearchResultCard";
 
@@ -32,14 +34,16 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const SearchMissionsPage = () => {
+  const [missions, setMissions] = useState<LaunchesPastType[]>([]);
   const { loading, error, data } = useQuery(getLaunchesLastQuery(10));
   const { classes } = useStyles();
 
+  useEffect(() => {
+    if (data) setMissions(dataToLaunchType(data));
+  }, [data]);
+
   if (loading) return <div>Loading</div>;
   if (error) return <div>Error: {error.message}</div>;
-
-  const launches = dataToLaunchType(data);
-  console.log(launches);
 
   return (
     <main className={classes.page}>
@@ -51,7 +55,7 @@ export const SearchMissionsPage = () => {
         </div>
         <Space h="lg" />
         <Stack spacing="lg">
-          {launches.map((launch) => (
+          {missions.map((launch) => (
             <SearchResultCard launch={launch} key={launch.id} />
           ))}
         </Stack>

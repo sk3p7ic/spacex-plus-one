@@ -1,9 +1,18 @@
-import { Button, Container, createStyles, Input, Title } from "@mantine/core";
+import {
+  Button,
+  Container,
+  createStyles,
+  Input,
+  Space,
+  Stack,
+  Title,
+} from "@mantine/core";
 import { useQuery } from "@apollo/client";
 import {
   getLaunchesLastQuery,
   dataToLaunchType,
 } from "../lib/searches/launchesPast";
+import { SearchResultCard } from "../components/Search/SearchResultCard";
 
 const useStyles = createStyles((theme) => ({
   page: {
@@ -40,6 +49,12 @@ export const SearchPage = () => {
           <Input variant="filled" placeholder="Enter mission name." />
           <Button>Search</Button>
         </div>
+        <Space h="lg" />
+        <Stack spacing="lg">
+          {launches.map((launch) => (
+            <SearchResultCard launch={launch} key={launch.id} />
+          ))}
+        </Stack>
       </Container>
     </main>
   );

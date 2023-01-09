@@ -5,6 +5,7 @@ import { DocumentNode, gql } from "@apollo/client";
  */
 export type LaunchesPastType = {
   id: number;
+  details?: string;
   launchDate: Date;
   missionName: string;
   launchSite: {
@@ -45,6 +46,7 @@ export const dataToLaunchType = (data: any): LaunchesPastType[] => {
   // Map over the data, convert it to the proper type, and return it
   return launchesPast.map<LaunchesPastType>((launch) => ({
     id: launch.id,
+    details: launch.details ? launch.details : undefined,
     launchDate: new Date(launch.launch_date_utc),
     missionName: launch.mission_name,
     launchSite: {
@@ -118,6 +120,7 @@ export const getLaunchesLastQuery = (
         }
         launch_date_utc
         id
+        details
       }
     }
   `;

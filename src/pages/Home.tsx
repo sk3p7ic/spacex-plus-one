@@ -7,8 +7,13 @@ import {
   Text,
   Title,
 } from "@mantine/core";
+import { useState } from "react";
 import CountUp from "react-countup";
 import SpaceXBg from "../assets/img/spacex_bg.jpg";
+import {
+  NextLaunch,
+  type BasicLaunchNotficationInfo,
+} from "../components/Home/NextLaunch";
 
 /** Defines the query to gather the needed information about the company. */
 const GET_CEO = gql`
@@ -18,6 +23,11 @@ const GET_CEO = gql`
       valuation
       launch_sites
       summary
+    }
+    launchNext {
+      mission_name
+      launch_date_utc
+      details
     }
   }
 `;
@@ -76,8 +86,15 @@ const formatter = new Intl.NumberFormat("en-US", {
 export const HomePage = () => {
   const { classes } = useStyles();
   const { loading, error, data } = useQuery(GET_CEO);
+  const [showNextLaunch, setShowNextLaunch] = useState<boolean>(true);
   if (loading) return <div>Loading</div>; // TODO: Better loading message.
   if (error) return <div>Error: {error.message}</div>; // TODO: Prettier error message.
+
+  const mission: BasicLaunchNotficationInfo = {
+    missionName: data.launchNext.mission_name,
+    launchDate: new Date(data.launchNext.launch_date_utc),
+    details: data.launchNext.details,
+  };
 
   return (
     <div className={classes.page}>
@@ -156,6 +173,12 @@ export const HomePage = () => {
         </a>
         .
       </Text>
+      {showNextLaunch && (
+        <NextLaunch
+          mission={mission}
+          onClose={() => setShowNextLaunch(false)}
+        />
+      )}
     </div>
   );
 };

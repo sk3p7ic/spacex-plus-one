@@ -63,6 +63,7 @@ export const SearchMissionsPage = () => {
             total={11}
             page={page}
             onChange={(p) => handlePageChange(p)}
+            position="center"
           />
           <Space h="sm" />
           <Text>Loading...</Text>
@@ -84,6 +85,7 @@ export const SearchMissionsPage = () => {
           total={11}
           page={page}
           onChange={(p) => handlePageChange(p)}
+          position="center"
         />
         <Space h="sm" />
         <Stack spacing="lg">
@@ -91,6 +93,14 @@ export const SearchMissionsPage = () => {
             <SearchResultCard launch={launch} key={launch.id} />
           ))}
         </Stack>
+        <Space h="sm" />
+        <Pagination
+          total={11}
+          page={page}
+          onChange={(p) => handlePageChange(p)}
+          position="center"
+        />
+        <Space h="xl" />
       </Container>
     </main>
   );

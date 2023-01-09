@@ -2,6 +2,8 @@
 
 This project uses the GraphQL API available at [https://api.spacex.land/graphql/](https://api.spacex.land/graphql/) to allow the user to view basic information about launches happening at SpaceX.
 
+A deployed example of this project is available at [https://spacex-plus-one.vercel.app/](https://spacex-plus-one.vercel.app/).
+
 ## Tech Stack
 
 This project uses [React](https://reactjs.org/) for the frontend and [Vite](https://vitejs.dev/) for the build compiler. In addition to these are the following:

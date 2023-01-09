@@ -9,7 +9,7 @@ import {
   Stack,
   Title,
 } from "@mantine/core";
-import { useState } from "react";
+import React, { useState } from "react";
 
 /** Defines the set of style classes that may be applied to the components
  * below.
@@ -42,8 +42,15 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+type NavLink = {
+  name: string;
+  href: string;
+  target?: undefined | React.HTMLAttributeAnchorTarget;
+  referrerPolicy?: undefined | React.HTMLAttributeReferrerPolicy;
+};
+
 /** Defines the links that are shown in the navbar. */
-const navLinks = [
+const navLinks: NavLink[] = [
   {
     name: "Home",
     href: "/",
@@ -55,6 +62,8 @@ const navLinks = [
   {
     name: "GitHub",
     href: "https://github.com/sk3p7ic/spacex-plus-one",
+    target: "_blank",
+    referrerPolicy: "no-referrer",
   },
 ];
 
@@ -95,7 +104,13 @@ export const Navbar = (props: NavbarProps) => {
         >
           <Stack>
             {navLinks.map((link) => (
-              <a href={link.href} key={link.href} className={classes.navLink}>
+              <a
+                href={link.href}
+                key={link.href}
+                className={classes.navLink}
+                target={link?.target}
+                referrerPolicy={link?.referrerPolicy}
+              >
                 {link.name}
               </a>
             ))}

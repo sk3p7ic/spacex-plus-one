@@ -41,16 +41,22 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const SearchMissionsPage = () => {
+  // Stores the list of missions (launches) that will be displayed to the user
   const [missions, setMissions] = useState<LaunchesPastType[]>([]);
+  // Sets the current page number of missions to display
   const [page, setPage] = useState(1);
+  // Sets if the user is currently attempting to search for a mission by name
   const [searchMode, setSearchMode] = useState(false);
+  // Stores a reference to the input where the user enters their search term
   const searchTermRef = useRef<HTMLInputElement | null>(null);
 
+  /** Gets the search term that the user has entered. */
   const getTerm = () => {
     if (!searchTermRef) return "";
     return searchTermRef.current?.value || "";
   };
 
+  // Attempt to query either the search data or past launch data from the API
   const { loading, error, data } = useQuery(
     searchMode
       ? getLaunchesByNameQuery(getTerm())

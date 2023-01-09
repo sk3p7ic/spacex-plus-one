@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import { useQuery } from "@apollo/client";
 import {
-  getLaunchesLastQuery,
+  getLaunchesPastQuery,
   dataToLaunchType,
   type LaunchesPastType,
 } from "../lib/searches/launchesPast";
@@ -60,7 +60,7 @@ export const SearchMissionsPage = () => {
   const { loading, error, data } = useQuery(
     searchMode
       ? getLaunchesByNameQuery(getTerm())
-      : getLaunchesLastQuery(10, page - 1)
+      : getLaunchesPastQuery(10, page - 1)
   );
   const { classes } = useStyles();
 

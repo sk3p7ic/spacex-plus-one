@@ -87,7 +87,7 @@ export const dataToLaunchType = (data: any): LaunchesPastType[] => {
  * @returns The query string that may be used to properly query the backend
  * for the needed data.
  */
-export const getLaunchesLastQuery = (
+export const getLaunchesPastQuery = (
   limit: number,
   start?: number
 ): DocumentNode => {

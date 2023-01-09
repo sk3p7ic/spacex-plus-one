@@ -1,4 +1,9 @@
 import { Button, Container, createStyles, Input, Title } from "@mantine/core";
+import { useQuery } from "@apollo/client";
+import {
+  getLaunchesLastQuery,
+  dataToLaunchType,
+} from "../lib/searches/launchesPast";
 
 const useStyles = createStyles((theme) => ({
   page: {
@@ -18,7 +23,14 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const SearchPage = () => {
+  const { loading, error, data } = useQuery(getLaunchesLastQuery(10));
   const { classes } = useStyles();
+
+  if (loading) return <div>Loading</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  const launches = dataToLaunchType(data);
+  console.log(launches);
 
   return (
     <main className={classes.page}>

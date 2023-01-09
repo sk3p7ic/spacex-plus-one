@@ -1,15 +1,11 @@
 import { useQuery, gql } from "@apollo/client";
-import {
-  createStyles,
-  Group,
-  MediaQuery,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { createStyles, Text, Title } from "@mantine/core";
 import { useState } from "react";
-import CountUp from "react-countup";
 import SpaceXBg from "../assets/img/spacex_bg.jpg";
+import {
+  CompanyInfo,
+  GroupCompanyStatCounters,
+} from "../components/Home/CompanyStatCounters";
 import {
   NextLaunch,
   type BasicLaunchNotficationInfo,
@@ -77,12 +73,6 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-/** Defines a formatter that may be used to format currency, in USD. */
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
-
 export const HomePage = () => {
   const { classes } = useStyles();
   const { loading, error, data } = useQuery(GET_CEO);
@@ -90,80 +80,28 @@ export const HomePage = () => {
   if (loading) return <div>Loading</div>; // TODO: Better loading message.
   if (error) return <div>Error: {error.message}</div>; // TODO: Prettier error message.
 
+  // Stores information about the next launch
   const mission: BasicLaunchNotficationInfo = {
     missionName: data.launchNext.mission_name,
     launchDate: new Date(data.launchNext.launch_date_utc),
     details: data.launchNext.details,
   };
 
+  // Stores information about the company
+  const companyInfo: CompanyInfo = {
+    employees: data.company.employees,
+    launch_sites: data.company.launch_sites,
+    valuation: data.company.valuation,
+  };
+
   return (
     <div className={classes.page}>
       <div className={classes.hero}>
         <Title className={classes.title}>SpaceX Lookup</Title>
-        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-          <Group>
-            <Text>
-              <CountUp
-                start={0}
-                end={data.company.launch_sites}
-                duration={3}
-                className={classes.highlight}
-              />{" "}
-              Active Launch Sites
-            </Text>
-            <Text>
-              <CountUp
-                start={0}
-                end={data.company.employees}
-                duration={3}
-                className={classes.highlight}
-              />{" "}
-              Employees
-            </Text>
-            <Text>
-              <CountUp
-                start={0}
-                end={data.company.valuation}
-                duration={3}
-                formattingFn={formatter.format}
-                className={classes.highlight}
-              />{" "}
-              Valuation
-            </Text>
-          </Group>
-        </MediaQuery>
-        <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-          <Stack>
-            <Text>
-              <CountUp
-                start={0}
-                end={data.company.launch_sites}
-                duration={3}
-                className={classes.highlight}
-              />{" "}
-              Active Launch Sites
-            </Text>
-            <Text>
-              <CountUp
-                start={0}
-                end={data.company.employees}
-                duration={3}
-                className={classes.highlight}
-              />{" "}
-              Employees
-            </Text>
-            <Text>
-              <CountUp
-                start={0}
-                end={data.company.valuation}
-                duration={3}
-                formattingFn={formatter.format}
-                className={classes.highlight}
-              />{" "}
-              Valuation
-            </Text>
-          </Stack>
-        </MediaQuery>
+        <GroupCompanyStatCounters
+          company={companyInfo}
+          classes={{ highlight: classes.highlight }}
+        />
         <Text>{data.company.summary}</Text>
       </div>
       <Text ta="center" size="xs" className={classes.credit}>

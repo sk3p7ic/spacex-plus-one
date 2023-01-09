@@ -44,7 +44,7 @@ export const SearchPage = () => {
   return (
     <main className={classes.page}>
       <Container>
-        <Title ta="center">Search</Title>
+        <Title ta="center">Search Missions</Title>
         <div className={classes.searchForm}>
           <Input variant="filled" placeholder="Enter mission name." />
           <Button>Search</Button>

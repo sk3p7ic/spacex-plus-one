@@ -8,6 +8,7 @@ import {
   Container,
   List,
   HoverCard,
+  Button,
 } from "@mantine/core";
 import { type LaunchesPastType } from "../../lib/searches/launchesPast";
 
@@ -98,6 +99,32 @@ export const SearchResultCard = ({ launch }: SearchResultCardProps) => {
             </List>
           </List.Item>
         </List>
+        <Group>
+          {launch.links.articleLink && (
+            <Button
+              component="a"
+              href={launch.links.articleLink}
+              variant="outline"
+              size="xs"
+              target="_blank"
+              referrerPolicy="no-referrer"
+            >
+              View Article
+            </Button>
+          )}
+          {launch.links.videoLink && (
+            <Button
+              component="a"
+              href={launch.links.videoLink}
+              variant="outline"
+              size="xs"
+              target="_blank"
+              referrerPolicy="no-referrer"
+            >
+              View Video
+            </Button>
+          )}
+        </Group>
       </Container>
     </Card>
   );

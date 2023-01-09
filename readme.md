@@ -31,3 +31,21 @@ If everything installs correctly, you should now be able to run the development 
 ```sh
 npm run dev
 ```
+
+## Project Structure
+
+```
+.
+├── public              -- Any public files.
+└── src
+    ├── assets
+    │   └── img         -- Image assets.
+    ├── components      -- All components.
+    │   ├── Home        -- Components on the home page.
+    │   └── Search      -- Components on the search page.
+    ├── lib
+    │   └── searches    -- Files containing search queries and their utilities.
+    └── pages           -- Contains the main application pages.
+```
+
+Please note that I prefixed files that served a more utilitarian purpose, namely `_Layout.tsx` and `_404.tsx` with an underscore to more easily identify those files and their purpose in the file tree.

@@ -34,6 +34,9 @@ type SearchResultCardProps = {
 export const SearchResultCard = ({ launch }: SearchResultCardProps) => {
   const { classes } = useStyles();
 
+  const validShips = launch.ships.filter((ship) => ship.id !== "");
+  launch = { ...launch, ships: validShips };
+
   return (
     <Card>
       <div className={classes.cardTitle}>

@@ -4,6 +4,7 @@ import {
   Container,
   createStyles,
   Input,
+  Pagination,
   Space,
   Stack,
   Title,
@@ -35,12 +36,17 @@ const useStyles = createStyles((theme) => ({
 
 export const SearchMissionsPage = () => {
   const [missions, setMissions] = useState<LaunchesPastType[]>([]);
-  const { loading, error, data } = useQuery(getLaunchesLastQuery(10));
+  const [page, setPage] = useState(1);
+  const { loading, error, data } = useQuery(getLaunchesLastQuery(10, page - 1));
   const { classes } = useStyles();
 
   useEffect(() => {
     if (data) setMissions(dataToLaunchType(data));
   }, [data]);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   if (loading) return <div>Loading</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -53,7 +59,13 @@ export const SearchMissionsPage = () => {
           <Input variant="filled" placeholder="Enter mission name." />
           <Button>Search</Button>
         </div>
-        <Space h="lg" />
+        <Space h="sm" />
+        <Pagination
+          total={11}
+          page={page}
+          onChange={(p) => handlePageChange(p)}
+        />
+        <Space h="sm" />
         <Stack spacing="lg">
           {missions.map((launch) => (
             <SearchResultCard launch={launch} key={launch.id} />

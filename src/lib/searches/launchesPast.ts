@@ -72,10 +72,10 @@ export const dataToLaunchType = (data: any): LaunchesPastType[] => {
       },
     },
     ships: launch.ships.map((ship: any) => ({
-      name: ship.name,
-      homePort: ship.home_port,
-      image: ship.image,
-      id: ship.id,
+      name: ship?.name ?? "",
+      homePort: ship?.home_port ?? "",
+      image: ship?.image ?? "",
+      id: ship?.id ?? "",
     })),
   }));
 };

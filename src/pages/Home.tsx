@@ -1,5 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
-import { createStyles, Text, Title } from "@mantine/core";
+import { Alert, createStyles, Text, Title } from "@mantine/core";
+import { IconAlertCircle, IconRocket } from "@tabler/icons";
 import { useState } from "react";
 import SpaceXBg from "../assets/img/spacex_bg.jpg";
 import {
@@ -32,6 +33,12 @@ const GET_CEO = gql`
  * below.
  */
 const useStyles = createStyles((theme) => ({
+  loadingErrorDiv: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexGrow: 1,
+  },
   page: {
     display: "flex",
     flexDirection: "column",
@@ -77,8 +84,26 @@ export const HomePage = () => {
   const { classes } = useStyles();
   const { loading, error, data } = useQuery(GET_CEO);
   const [showNextLaunch, setShowNextLaunch] = useState<boolean>(true);
-  if (loading) return <div>Loading</div>; // TODO: Better loading message.
-  if (error) return <div>Error: {error.message}</div>; // TODO: Prettier error message.
+  if (loading)
+    return (
+      <div className={classes.loadingErrorDiv}>
+        <IconRocket size={64} />
+      </div>
+    ); 
+  if (error)
+    return (
+      <div className={classes.loadingErrorDiv}>
+        <Alert
+          icon={<IconAlertCircle size={18} />}
+          title="Something went wrong!"
+          color="red"
+          withCloseButton
+          closeButtonLabel="Close this message."
+        >
+          {error.message}
+        </Alert>
+      </div>
+    ); 
 
   // Stores information about the next launch
   const mission: BasicLaunchNotficationInfo = {

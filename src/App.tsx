@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     errorElement: toRouteElement(<ErrorPage />),
   },
   {
-    path: "/search",
+    path: "/search-missions",
     element: toRouteElement(<SearchMissionsPage />),
   },
 ]);

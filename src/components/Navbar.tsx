@@ -57,7 +57,7 @@ const navLinks: NavLink[] = [
   },
   {
     name: "Search Missions",
-    href: "/search",
+    href: "/search-missions",
   },
   {
     name: "GitHub",

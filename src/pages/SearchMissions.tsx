@@ -31,7 +31,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export const SearchPage = () => {
+export const SearchMissionsPage = () => {
   const { loading, error, data } = useQuery(getLaunchesLastQuery(10));
   const { classes } = useStyles();
 

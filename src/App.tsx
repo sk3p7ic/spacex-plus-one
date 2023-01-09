@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./pages/_Layout";
 import { HomePage } from "./pages/Home";
 import { ErrorPage } from "./pages/_404";
-import { SearchPage } from "./pages/Search";
+import { SearchMissionsPage } from "./pages/SearchMissions";
 
 const toRouteElement = (children: JSX.Element): JSX.Element => (
   <Layout>{children}</Layout>
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/search",
-    element: toRouteElement(<SearchPage />),
+    element: toRouteElement(<SearchMissionsPage />),
   },
 ]);
 

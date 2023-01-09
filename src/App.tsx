@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { Layout } from "./pages/_Layout";
 import { HomePage } from "./pages/Home";
 import { ErrorPage } from "./pages/_404";
@@ -17,6 +21,14 @@ const router = createBrowserRouter([
   {
     path: "/search-missions",
     element: toRouteElement(<SearchMissionsPage />),
+  },
+  {
+    path: "/ships",
+    element: <Navigate to="/search-missions" replace />,
+  },
+  {
+    path: "/sites",
+    element: <Navigate to="/search-missions" replace />,
   },
 ]);
 

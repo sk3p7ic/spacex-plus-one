@@ -13,6 +13,9 @@ import {
 import { IconAlertCircle } from "@tabler/icons";
 import { useLoaderData } from "react-router-dom";
 
+/** Loader function for `react-router-dom` that returns the query needed to
+ * serve the page with a given `siteId`.
+ */
 export const loader = ({ params }: any) => {
   return gql`
   {

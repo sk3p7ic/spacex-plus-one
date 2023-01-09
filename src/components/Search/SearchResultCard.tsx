@@ -56,7 +56,10 @@ export const SearchResultCard = ({ launch }: SearchResultCardProps) => {
           </List.Item>
 
           <List.Item>
-            <strong>Launch Site:</strong> {launch.launchSite.siteNameLong}
+            <strong>Launch Site:</strong>{" "}
+            <a href={`/sites/${launch.launchSite.siteId}`}>
+              {launch.launchSite.siteNameLong}
+            </a>
           </List.Item>
 
           <List.Item>
@@ -80,7 +83,9 @@ export const SearchResultCard = ({ launch }: SearchResultCardProps) => {
             <List>
               {launch.ships.length > 0 ? (
                 launch.ships.map((ship) => (
-                  <List.Item key={ship.name}>{ship.name}</List.Item>
+                  <List.Item key={ship.name}>
+                    <a href={`/ships/${ship.id}`}>{ship.name}</a>
+                  </List.Item>
                 ))
               ) : (
                 <List.Item>

@@ -31,6 +31,7 @@ export type LaunchesPastType = {
     name: string;
     homePort: string;
     image: string;
+    id: string;
   }[];
 };
 
@@ -74,6 +75,7 @@ export const dataToLaunchType = (data: any): LaunchesPastType[] => {
       name: ship.name,
       homePort: ship.home_port,
       image: ship.image,
+      id: ship.id,
     })),
   }));
 };
@@ -117,6 +119,7 @@ export const getLaunchesLastQuery = (
           name
           home_port
           image
+          id
         }
         launch_date_utc
         id
